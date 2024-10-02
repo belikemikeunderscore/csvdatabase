@@ -3,12 +3,22 @@
 #include <unistd.h>
 using namespace std;
 
+int produtosid = 1;
 
 
+void alterarprodutos(){
 
+}
+void exibirprodutos(){
+
+}
+void eliminarprodutos(){
+
+}
 void eliminar(){
     system("clear");
-    cout << "Esta ação irá eliminar todos os dados da base de dados\nDe certeza que quer continuar?\n\n[1] - Sim\n[2] - Não\n";
+    cout << "Esta ação irá eliminar todos os dados da base de dados" << endl;
+    cout << "De certeza que quer continuar?\n\n[1] - Sim\n[2] - Não\n";
     int eliminarcheck;
     cin >> eliminarcheck;
 switch(eliminarcheck){
@@ -27,10 +37,27 @@ switch(eliminarcheck){
     break;
 }
 }
-
 void addprodutos(){
     ofstream base("base.csv", ios :: app);
-    base << "thing\n";
+            system("clear");
+        string nomeprod;
+        cout << "Nome do produto:\n";
+        cin >> nomeprod;
+            system("clear");
+        int quantidade;
+        cout << "Quantidade:\n";
+        cin >> quantidade;
+            system("clear");
+            
+        float preco;
+        cout << "Preço (Aceita vírgula)";
+        cin >> preco;
+            system("clear");
+
+
+    base << produtosid << ", " << nomeprod << ", " << quantidade << ", " << preco << ", A\n";
+    produtosid += 1;
+
     base.close();
 }
 
@@ -52,7 +79,7 @@ int main(){
         
             if (createoption == 1){
                 ofstream base("base.csv");
-                base << "ID, NOME_DO_PRODUTO, QUANTIDADE, PRECO, STATUS";
+                base << "ID, NOME_DO_PRODUTO, QUANTIDADE, PRECO, STATUS\n";
                 base.close();
                 cout << "\nBase de dados criada.\n";
                 sleep(1);
@@ -64,24 +91,27 @@ int main(){
 
     }
 
-        system("clear");
+    system("clear");
         int escolha;
         cout << "Sistema da loja\n\n[1] Adicionar produtos \n[2] Exibir produtos \n[3] Calcular e exibir stock \n[0] Eliminar base de dados\n";
             cin >> escolha;
 
         switch(escolha){
             case 1:
-                addprodutos();
+                exibirprodutos();
                 break;
             case 2:
-
+                alterarprodutos();
+                break;
             case 3:
-
-            case 4:
-
-
+                eliminarprodutos();
+                break;
+            case 4: 
+                addprodutos();
+                break;
             case 0:
             eliminar();
+            break;
         }
 
     
