@@ -43,14 +43,14 @@ void alterarprodutos() {
     while (getline(content, linha)) {
         if (currentLine == indexid) {
 
-            stringstream ss(linha);
+            stringstream slinha(linha);
             string idStr, nome, quantidade, preco, status;
 
-            getline(ss, idStr, ',');
-            getline(ss, nome, ',');
-            getline(ss, quantidade, ',');
-            getline(ss, preco, ',');
-            getline(ss, status, ',');
+            getline(slinha, idStr, ',');
+            getline(slinha, nome, ',');
+            getline(slinha, quantidade, ',');
+            getline(slinha, preco, ',');
+            getline(slinha, status, ',');
 
 
             quantidade = novaquantidade;
@@ -78,15 +78,15 @@ void exibirprodutos(){
     getline(file, line);
 
      while (getline(file, line)) {
-        stringstream ss(line); // isto é um stringstream 👍
+        stringstream streamlinha(line); 
         string id, nome, quantidade, preco, status;
 
     //lê as linhas
-        getline(ss, id, ',');
-        getline(ss, nome, ',');
-        getline(ss, quantidade, ',');
-        getline(ss, preco, ',');
-        getline(ss, status, ',');
+        getline(streamlinha, id, ',');
+        getline(streamlinha, nome, ',');
+        getline(streamlinha, quantidade, ',');
+        getline(streamlinha, preco, ',');
+        getline(streamlinha, status, ',');
 
     //rele as linhas
         cout << "ID: " << id << endl;
@@ -125,14 +125,14 @@ void eliminarprodutos() {
     while (getline(content, linha)) {
         if (currentLine == indexid) {
 //modifica
-            stringstream ss(linha);
+            stringstream streamlinha(linha);
             string idStr, nome, quantidade, preco, status;
 
-            getline(ss, idStr, ',');
-            getline(ss, nome, ',');
-            getline(ss, quantidade, ',');
-            getline(ss, preco, ',');
-            getline(ss, status, ',');
+            getline(streamlinha, idStr, ',');
+            getline(streamlinha, nome, ',');
+            getline(streamlinha, quantidade, ',');
+            getline(stramlinha, preco, ',');
+            getline(streamlinha, status, ',');
 
 //se for A muda para D
             if (status == "A") {
