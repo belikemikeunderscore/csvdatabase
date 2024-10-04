@@ -17,40 +17,33 @@ void clearterminal() {
 
 void alterarprodutos() {
     int id;
-    string newQuantidade, newPreco;
+    string novaquantidade, novopreco;
 
-    // Get product ID, new quantity, and new price from user
     cout << "Introduzir ID do produto a alterar:\n";
     cin >> id;
     cout << "Introduzir nova quantidade:\n";
-    cin >> newQuantidade;
+    cin >> novaquantidade;
     cout << "Introduzir novo preço:\n";
-    cin >> newPreco;
+    cin >> novopreco;
 
     ifstream file("base.csv");
     stringstream buffer;
-    string line;
-    int indexid = id + 2; // Assuming the first two lines are headers
-    int currentLine = 1;  // To track the current line number
+    string linha;
+    int indexid = id + 2; 
+    int currentLine = 1;  
 
-    if (!file.is_open()) {
-        cerr << "Erro ao abrir o arquivo." << endl;
-        return;
-    }
-
-    // Read the entire file into the buffer
+    // file temporario
     buffer << file.rdbuf();
     file.close();
 
-    // Reopen the file for writing
     ofstream outfile("base.csv");
     stringstream content(buffer.str());
 
-    // Process each line
-    while (getline(content, line)) {
+    // processa cada linha
+    while (getline(content, linha)) {
         if (currentLine == indexid) {
-            // Modify the target line
-            stringstream ss(line);
+
+            stringstream ss(linha);
             string idStr, nome, quantidade, preco, status;
 
             getline(ss, idStr, ',');
@@ -59,18 +52,18 @@ void alterarprodutos() {
             getline(ss, preco, ',');
             getline(ss, status, ',');
 
-            // Update the quantity and price
-            quantidade = newQuantidade;
-            preco = newPreco;
+
+            quantidade = novaquantidade;
+            preco = novopreco;
 
             cout << "Produto com ID " << id << " alterado. Nova quantidade: " << quantidade << ", Novo preço: " << preco << endl;
 
-            // Rebuild the modified line
-            line = idStr + "," + nome + "," + quantidade + "," + preco + "," + status;
+
+            linha = idStr + ", " + nome + ", " + quantidade + ", " + preco + ", " + status;
         }
 
-        // Write the current (or modified) line back to the file
-        outfile << line << endl;
+    //guarda
+        outfile << linha << endl;
         currentLine++;
     }
 
@@ -79,24 +72,23 @@ void alterarprodutos() {
 
 void exibirprodutos(){
     clearterminal();
-    ifstream file("base.csv"); // Open the file
+    ifstream file("base.csv"); 
     string line;
     
     getline(file, line);
 
-    // Read each line and display product information
-    while (getline(file, line)) {
-        stringstream ss(line); // Create a stringstream to parse the line
+     while (getline(file, line)) {
+        stringstream ss(line); // isto é um stringstream 👍
         string id, nome, quantidade, preco, status;
 
-        // Read the fields separated by commas
+    //lê as linhas
         getline(ss, id, ',');
         getline(ss, nome, ',');
         getline(ss, quantidade, ',');
         getline(ss, preco, ',');
         getline(ss, status, ',');
 
-        // Output the product details
+    //rele as linhas
         cout << "ID: " << id << endl;
         cout << "Nome: " << nome << endl;
         cout << "Quantidade: " << quantidade << endl;
@@ -117,28 +109,23 @@ void eliminarprodutos() {
 
     ifstream file("base.csv");
     stringstream buffer;
-    string line;
-    int indexid = id + 2; // Assuming the first two lines are headers
-    int currentLine = 1;  // To track the current line number
+    string linha;
+    int indexid = id + 2; 
+    int currentLine = 1; 
 
-    if (!file.is_open()) {
-        cerr << "Erro ao abrir o arquivo." << endl;
-        return;
-    }
-
-    // Prepare a buffer to store all the lines
+//buffer
     buffer << file.rdbuf(); 
     file.close();
 
-    // Reopen the file for writing
+//abre o ficheiro
     ofstream outfile("base.csv");
     stringstream content(buffer.str());
 
-    // Process each line and modify the target one
-    while (getline(content, line)) {
+//analisa cada linha
+    while (getline(content, linha)) {
         if (currentLine == indexid) {
-            // Modify the target line
-            stringstream ss(line);
+//modifica
+            stringstream ss(linha);
             string idStr, nome, quantidade, preco, status;
 
             getline(ss, idStr, ',');
@@ -147,20 +134,20 @@ void eliminarprodutos() {
             getline(ss, preco, ',');
             getline(ss, status, ',');
 
-            // Check if status is 'A' and change it to 'D'
+//se for A muda para D
             if (status == "A") {
                 status = "D";
                 cout << "Produto com ID " << id << " alterado de A para D." << endl;
-            } else {
+            } else { //case não seja A não muda
                 cout << "O estado do produto não é 'A'. Nenhuma alteração feita." << endl;
             }
 
-            // Rebuild the modified line
-            line = idStr + "," + nome + "," + quantidade + "," + preco + "," + status;
+// linha que substitui
+            linha = idStr + ", " + nome + ", " + quantidade + ", " + preco + ", " + status;
         }
 
-        // Write the current (or modified) line back to the file
-        outfile << line << endl;
+// altera o ficheiro
+        outfile << linha << endl;
         currentLine++;
     }
 
@@ -168,7 +155,7 @@ void eliminarprodutos() {
 }
 
 void addprodutos(int produtosid){
-    ofstream base("base.csv", ios :: app);
+    ofstream base("base.csv", ios :: app);//APPEND MODE porque tava a limpar linhas
             clearterminal();
         string nomeprod;
             cout << "Nome do produto:\n";
@@ -193,7 +180,7 @@ int contarlinhas(const string& filename) {
     int lineCount = 0;
     string line;
     
-    // Read each line and increment the count
+    // lê cada linha e faz incrementação
     while (getline(file, line)) {
         ++lineCount;
     }
